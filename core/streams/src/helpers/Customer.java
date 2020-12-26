@@ -1,3 +1,3 @@
 package helpers;
 
-record Customer(String firstName, String lastName, Integer age) {}
+public record Customer(String firstName, String lastName, Integer age) {}
