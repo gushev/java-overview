@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class MethodGenericsClass {
 
-  public static <T> T getBean(String name, Class<T> tClass) {
+  public static <T extends Integer> T getBean(String name, Class<T> tClass) {
 
     try {
       return tClass.getConstructor(int.class).newInstance(10);
