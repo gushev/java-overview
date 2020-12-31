@@ -16,7 +16,7 @@ public class CustomerGenerator {
 
     System.out.println("List of customers: ");
 
-    for (int i = 0; i <= number; i++) {
+    for (int i = 0; i < number; i++) {
       Customer customer =
           new Customer(
               getRandomNameFromList(firstNames),
