@@ -1,6 +1,6 @@
 import java.util.Optional;
 
-public class Example1Intermediate {
+public class Example2Intermediate {
   public static void main(String[] args) {
     Optional<Integer> integerOptional = Optional.of(10);
 
