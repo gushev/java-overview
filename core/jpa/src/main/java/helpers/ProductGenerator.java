@@ -1,6 +1,7 @@
 package helpers;
 
 import com.github.javafaker.Faker;
+import entities.IProduct;
 import entities.Product;
 
 import javax.persistence.EntityManager;
@@ -10,15 +11,18 @@ import java.time.ZoneId;
 import java.util.concurrent.TimeUnit;
 
 public class ProductGenerator {
-    private static final Faker faker = new Faker();
+  private static final Faker faker = new Faker();
 
-    public static Product getProduct() {
-        Product product = new Product();
-        product.setName(faker.commerce().productName());
-        product.setPrice(Double.parseDouble(faker.commerce().price(0d, 1000d)));
-        product.setExpirationDate(
-                faker.date().future(100, TimeUnit.DAYS)
-                        .toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        return product;
-    }
+  public static <T extends IProduct> T fillWithFakeData(T product) {
+    product.setName(faker.commerce().productName());
+    product.setPrice(Double.parseDouble(faker.commerce().price(0d, 1000d)));
+    product.setExpirationDate(
+        faker
+            .date()
+            .future(100, TimeUnit.DAYS)
+            .toInstant()
+            .atZone(ZoneId.systemDefault())
+            .toLocalDate());
+    return product;
+  }
 }

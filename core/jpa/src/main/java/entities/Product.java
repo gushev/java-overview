@@ -5,46 +5,47 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "product")
-public class Product {
+public class Product implements IProduct {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
-    private double price;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
 
-    @Column(name = "expiration_date")
-    private LocalDate expiration_date;
+  private String name;
+  private double price;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  @Column(name = "expiration_date")
+  private LocalDate expiration_date;
 
-    public int getId() {
-        return id;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public double getPrice() {
-        return price;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+  public double getPrice() {
+    return price;
+  }
 
-    public LocalDate getExpirationDate() {
-        return expiration_date;
-    }
+  public void setPrice(double price) {
+    this.price = price;
+  }
 
-    public void setExpirationDate(LocalDate expirationDate) {
-        this.expiration_date = expirationDate;
-    }
+  public LocalDate getExpirationDate() {
+    return expiration_date;
+  }
+
+  public void setExpirationDate(LocalDate expirationDate) {
+    this.expiration_date = expirationDate;
+  }
 }
