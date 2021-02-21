@@ -1,20 +1,20 @@
 package main;
 
-import entities.IProduct;
-import entities.Product;
-import entities.ProductGenTypeTable;
-import entities.ProductUuidPk;
+import entities.product.IProduct;
+import entities.product.Product;
+import entities.product.ProductGenTypeTable;
+import entities.product.ProductUuidPk;
 import helpers.JpaUtil;
-import helpers.ProductGenerator;
+import helpers.DataGenerator;
 
 import javax.persistence.EntityManager;
 
-public class Example1ProductPersist {
+public class Example1Persist {
   public static void main(String[] args) {
     EntityManager entityManager = JpaUtil.getEntityManager();
-    IProduct product = ProductGenerator.fillWithFakeData(new Product());
-    IProduct productGenTypeTable = ProductGenerator.fillWithFakeData(new ProductGenTypeTable());
-    IProduct productUuidPk = ProductGenerator.fillWithFakeData(new ProductUuidPk());
+    IProduct product = DataGenerator.fillProductWithFakeData(new Product());
+    IProduct productGenTypeTable = DataGenerator.fillProductWithFakeData(new ProductGenTypeTable());
+    IProduct productUuidPk = DataGenerator.fillProductWithFakeData(new ProductUuidPk());
 
     try {
       entityManager.getTransaction().begin();
@@ -27,6 +27,8 @@ public class Example1ProductPersist {
     } catch (Exception e) {
       e.printStackTrace();
       entityManager.getTransaction().rollback();
+    } finally{
+      entityManager.close();
     }
   }
 }
