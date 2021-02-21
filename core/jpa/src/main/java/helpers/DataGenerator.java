@@ -1,13 +1,12 @@
 package helpers;
 
 import com.github.javafaker.Faker;
+import embeddables.Address;
+import entities.Company;
 import entities.price.Currency;
 import entities.price.Price;
 import entities.product.IProduct;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -35,5 +34,18 @@ public class DataGenerator {
     price.setCurrencyString(currency);
     price.setDatetimeCreated(new Date());
     return price;
+  }
+
+  public static Company fillCompanyWithFakeData(Company company) {
+    company.setName(faker.company().name());
+    company.setAddress(fillAddressWithFakeData(new Address()));
+    return company;
+  }
+
+  public static Address fillAddressWithFakeData(Address address) {
+    address.setCity(faker.address().city());
+    address.setNumber(faker.address().streetAddressNumber());
+    address.setStreet(faker.address().streetName());
+    return address;
   }
 }
