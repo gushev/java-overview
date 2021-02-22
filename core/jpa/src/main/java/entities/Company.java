@@ -15,6 +15,8 @@ public class Company {
   private String name;
 
   @Embedded
+  // The number column is actually called address_number in the company table
+  @AttributeOverride(name = "number", column = @Column(name = "address_number"))
   private Address address;
 
   public String getName() {
