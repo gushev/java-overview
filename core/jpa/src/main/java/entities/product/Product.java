@@ -14,6 +14,9 @@ public class Product implements IProduct {
   private String name;
   private double price;
 
+  @OneToOne(mappedBy = "product", fetch = FetchType.LAZY)
+  private ProductDetails productDetails;
+
   @Column(name = "expiration_date")
   private LocalDate expiration_date;
 
@@ -47,5 +50,13 @@ public class Product implements IProduct {
 
   public void setExpirationDate(LocalDate expirationDate) {
     this.expiration_date = expirationDate;
+  }
+
+  public ProductDetails getProductDetails() {
+    return productDetails;
+  }
+
+  public void setProductDetails(ProductDetails productDetails) {
+    this.productDetails = productDetails;
   }
 }

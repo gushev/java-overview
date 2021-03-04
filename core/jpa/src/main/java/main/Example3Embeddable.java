@@ -1,6 +1,6 @@
 package main;
 
-import entities.Company;
+import entities.company.Company;
 import helpers.DataGenerator;
 import helpers.JpaUtil;
 

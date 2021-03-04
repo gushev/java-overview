@@ -1,4 +1,4 @@
-package entities;
+package entities.company;
 
 import embeddables.Address;
 

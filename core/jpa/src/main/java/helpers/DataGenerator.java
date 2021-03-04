@@ -2,10 +2,13 @@ package helpers;
 
 import com.github.javafaker.Faker;
 import embeddables.Address;
-import entities.Company;
+import entities.company.Company;
+import entities.company.CompanySecondaryTable;
 import entities.price.Currency;
 import entities.price.Price;
 import entities.product.IProduct;
+import entities.product.Product;
+import entities.product.ProductDetails;
 
 import java.time.ZoneId;
 import java.util.Date;
@@ -27,6 +30,12 @@ public class DataGenerator {
     return product;
   }
 
+  public static ProductDetails fillProductDetailsWithFakeData(ProductDetails productDetails) {
+    productDetails.setKcal(String.valueOf(faker.number().numberBetween(1, 5000)));
+    productDetails.setProduct(fillProductWithFakeData(new Product()));
+    return productDetails;
+  }
+
   public static Price fillPriceWithFakeData(Price price) {
     Currency currency = Currency.randomCurrency();
     price.setAmount(Double.parseDouble(faker.commerce().price(0d, 1000d)));
@@ -34,6 +43,13 @@ public class DataGenerator {
     price.setCurrencyString(currency);
     price.setDatetimeCreated(new Date());
     return price;
+  }
+
+  public static CompanySecondaryTable fillCompanyWithFakeData(CompanySecondaryTable company) {
+    company.setName(faker.company().name());
+    company.setNumber(faker.address().streetAddressNumber());
+    company.setStreet(faker.address().streetName());
+    return company;
   }
 
   public static Company fillCompanyWithFakeData(Company company) {

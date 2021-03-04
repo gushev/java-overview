@@ -1,17 +1,18 @@
-DROP table if exists company;
+DROP table if exists product;
 
-CREATE TABLE company
+CREATE TABLE product
 (
     id   int PRIMARY KEY AUTO_INCREMENT,
-    name varchar(45) NOT NULL
+    name varchar(45) NOT NULL,
+    price double,
+    expiration_date date
 );
 
-DROP table if exists company_address;
+DROP table if exists product_details;
 
-CREATE TABLE company_address
+CREATE TABLE product_details
 (
     id   bigint PRIMARY KEY AUTO_INCREMENT,
-    street varchar(45),
-    number varchar(45),
-    company int
+    kcal varchar(45),
+    product_id int
 );

@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "company")
 @SecondaryTable(name = "company_address")
-public class Company {
+public class CompanySecondaryTable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +18,18 @@ public class Company {
 
   @Column(table = "company_address")
   private String number;
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setStreet(String street) {
+    this.street = street;
+  }
+
+  public void setNumber(String number) {
+    this.number = number;
+  }
 
   public String getName() {
     return name;

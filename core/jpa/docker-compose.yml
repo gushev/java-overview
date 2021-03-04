@@ -10,5 +10,3 @@ services:
       MYSQL_PASSWORD: 1q2w3e
       MYSQL_DATABASE: jpa_overview
       MYSQL_ROOT_PASSWORD: 1q2w3e
-    volumes:
-      - .docker/images/mysql/config:/etc/mysql/conf.d
