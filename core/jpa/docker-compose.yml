@@ -1,0 +1,14 @@
+version: '3'
+services:
+  mysql:
+    container_name: jpa_db
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1q2w3e
+      MYSQL_DATABASE: jpa_overview
+      MYSQL_ROOT_PASSWORD: 1q2w3e
+    volumes:
+      - .docker/images/mysql/config:/etc/mysql/conf.d
