@@ -1,25 +1,26 @@
 package main;
 
-import entities.company.CompanySecondaryTable;
-import entities.product.ProductDetails;
+import entities.company.Company;
+import entities.employee.Employee;
 import helpers.DataGenerator;
 import helpers.JpaUtil;
 
 import javax.persistence.EntityManager;
 
-public class Example5Relationships {
+public class Example6OneToMany {
   public static void main(String[] args) {
     EntityManager entityManager = JpaUtil.getEntityManager();
-    CompanySecondaryTable company =
-        DataGenerator.fillCompanyWithFakeData(new CompanySecondaryTable());
 
-    ProductDetails productDetails = DataGenerator.fillProductDetailsWithFakeData(new ProductDetails());
+    Company company = DataGenerator.fillCompanyWithFakeData(new Company());
+
+    Employee employee = new Employee();
+    employee.setName("Georgi Ushev");
+    employee.setDepartment(company);
 
     try {
       entityManager.getTransaction().begin();
 
-      //entityManager.persist(company);
-      entityManager.persist(productDetails);
+      entityManager.persist(company);
 
       entityManager.getTransaction().commit();
     } catch (Exception e) {
