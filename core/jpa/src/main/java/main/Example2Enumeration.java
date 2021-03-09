@@ -11,17 +11,6 @@ public class Example2Enumeration {
     EntityManager entityManager = JpaUtil.getEntityManager();
     Price price = DataGenerator.fillPriceWithFakeData(new Price());
 
-    try {
-      entityManager.getTransaction().begin();
-
-      entityManager.persist(price);
-
-      entityManager.getTransaction().commit();
-    } catch (Exception e) {
-      e.printStackTrace();
-      entityManager.getTransaction().rollback();
-    } finally{
-      entityManager.close();
-    }
+    JpaUtil.executeInTransaction(() -> entityManager.persist(price));
   }
 }

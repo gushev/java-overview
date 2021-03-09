@@ -16,19 +16,12 @@ public class Example1Persist {
     IProduct productGenTypeTable = DataGenerator.fillProductWithFakeData(new ProductGenTypeTable());
     IProduct productUuidPk = DataGenerator.fillProductWithFakeData(new ProductUuidPk());
 
-    try {
-      entityManager.getTransaction().begin();
-
+    Runnable query = () -> {
       entityManager.persist(product);
       entityManager.persist(productGenTypeTable);
       entityManager.persist(productUuidPk);
+    };
 
-      entityManager.getTransaction().commit();
-    } catch (Exception e) {
-      e.printStackTrace();
-      entityManager.getTransaction().rollback();
-    } finally{
-      entityManager.close();
-    }
+    JpaUtil.executeInTransaction(query);
   }
 }

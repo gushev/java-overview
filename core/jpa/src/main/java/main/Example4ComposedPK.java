@@ -2,7 +2,7 @@ package main;
 
 import entities.building.Building;
 import entities.building.BuildingPK;
-import entities.deparment.Department;
+import entities.department.Department;
 import helpers.JpaUtil;
 
 import javax.persistence.EntityManager;
@@ -25,19 +25,12 @@ public class Example4ComposedPK {
     building.setId(buildingPK);
     building.setName("Building Name");
 
+    Runnable query =
+        () -> {
+          entityManager.persist(department);
+          entityManager.persist(building);
+        };
 
-    try {
-      entityManager.getTransaction().begin();
-
-      entityManager.persist(department);
-      entityManager.persist(building);
-
-      entityManager.getTransaction().commit();
-    } catch (Exception e) {
-      e.printStackTrace();
-      entityManager.getTransaction().rollback();
-    } finally {
-      entityManager.close();
-    }
+    JpaUtil.executeInTransaction(query);
   }
 }

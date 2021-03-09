@@ -1,7 +1,6 @@
 package entities.employee;
 
 import entities.company.Company;
-import entities.deparment.Department;
 
 import javax.persistence.*;
 
@@ -14,7 +13,8 @@ public class Employee {
 
   private String name;
 
-  @ManyToOne
+  @JoinColumn(name = "company_id")
+  @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
   private Company company;
 
   public String getName() {

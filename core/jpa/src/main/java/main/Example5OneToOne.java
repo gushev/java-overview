@@ -13,20 +13,15 @@ public class Example5OneToOne {
     CompanySecondaryTable company =
         DataGenerator.fillCompanyWithFakeData(new CompanySecondaryTable());
 
-    ProductDetails productDetails = DataGenerator.fillProductDetailsWithFakeData(new ProductDetails());
+    ProductDetails productDetails =
+        DataGenerator.fillProductDetailsWithFakeData(new ProductDetails());
 
-    try {
-      entityManager.getTransaction().begin();
+    Runnable query =
+        () -> {
+          entityManager.persist(company);
+          entityManager.persist(productDetails);
+        };
 
-      entityManager.persist(company);
-      entityManager.persist(productDetails);
-
-      entityManager.getTransaction().commit();
-    } catch (Exception e) {
-      e.printStackTrace();
-      entityManager.getTransaction().rollback();
-    } finally {
-      entityManager.close();
-    }
+    JpaUtil.executeInTransaction(query);
   }
 }

@@ -39,6 +39,10 @@ public class Main {
     BinaryOperator<Integer> binaryOperator = (i, u) -> i + u;
     System.out.println(binaryOperator.apply(10, 5));
 
+    // Runnable - accepts nothing, returns nothing
+    Runnable runnable = () -> System.out.println("Execution of runnable");
+    runnable.run();
+
     // CustomFunction - copy of BiFunction
     CustomFunction<String, Integer, Integer> customFunction = (s, i) -> s.length() + i;
     System.out.println(customFunction.apply("Some string", 10));

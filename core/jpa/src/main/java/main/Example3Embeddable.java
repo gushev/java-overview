@@ -11,17 +11,6 @@ public class Example3Embeddable {
     EntityManager entityManager = JpaUtil.getEntityManager();
     Company company = DataGenerator.fillCompanyWithFakeData(new Company());
 
-    try {
-      entityManager.getTransaction().begin();
-
-      entityManager.persist(company);
-
-      entityManager.getTransaction().commit();
-    } catch (Exception e) {
-      e.printStackTrace();
-      entityManager.getTransaction().rollback();
-    } finally{
-      entityManager.close();
-    }
+    JpaUtil.executeInTransaction(() -> entityManager.persist(company));
   }
 }
