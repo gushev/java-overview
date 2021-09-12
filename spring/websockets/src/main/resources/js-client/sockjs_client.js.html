@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@5.0.0/bundles/stomp.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+</head>
+<body>
+<input type="text" id="username" placeholder="username">
+<input type="text" id="message" placeholder="message">
+<button id="sendMessage">Send</button>
+<div id="messages"></div>
+</body>
+<script>
+    function mySocketFactory() {
+        return new SockJS('http://127.0.0.1:8080/websocket-test');
+    }
+
+    const client = new StompJs.Client({
+        webSocketFactory: mySocketFactory,
+        debug: function (str) {
+            console.log(str);
+        },
+        reconnectDelay: 5000,
+        heartbeatIncoming: 4000,
+        heartbeatOutgoing: 4000,
+    });
+
+    client.onConnect = function (frame) {
+        console.log("connected");
+        const subscription = client.subscribe('/topic/greeting', function (message) {
+            $('#messages').prepend('<p>' + message.body + '</p>');
+        });
+    };
+
+    $('#sendMessage').on('click', function(){
+        let username = $('#username').val();
+        let message = $('#message').val();
+        client.publish({ destination: '/app/greeting/' + username, body: message });
+    });
+
+    client.activate();
+</script>
+</html>
